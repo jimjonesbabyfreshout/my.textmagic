@@ -1,3 +1,1 @@
-function correctCaptcha() {
-    $('form').find("button[type='submit']").attr('disabled', false);
-}
+function correctCaptcha() {$('form').find("button[type='submit']").attr('disabled', false);}
