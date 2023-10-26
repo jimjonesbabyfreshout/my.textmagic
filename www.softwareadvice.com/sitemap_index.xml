@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_static.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_categories.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_products.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_versus.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_alternatives_facet.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_reviews_facet.xml</loc>
+      </sitemap>
+      <sitemap>
+          <loc>https://www.softwareadvice.com/sitemap_resources.xml</loc>
+      </sitemap>
+  </sitemapindex>

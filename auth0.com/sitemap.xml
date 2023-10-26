@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+    <sitemap>
+        <loc>https://auth0.com/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/jp/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/de/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/fr/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/es/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/pt/sitemap-root.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/blog/sitemap.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/authenticate/sitemap.xml</loc>
+    </sitemap>
+    
+    <sitemap>
+        <loc>https://auth0.com/developers/hub/sitemap.xml</loc>
+    </sitemap>
+    
+</sitemapindex>

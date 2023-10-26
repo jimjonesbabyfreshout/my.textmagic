@@ -1,0 +1,18 @@
+(function(){var user=app.data.user;var isChatApp=window.location.pathname.substr(0,21)=="/online/messages/chat";var imPrimaryTab=false;var primaryTabInterval;var settings={contactIcon:'/ui/app/img/logo/logo_160.png',phoneIcon:'/ui/app/img/logo/logo_160.png'};var syncUrl=app.data.socketUrl;var turnToPrimaryTab=function(relayRace){var ipmt=window.localStorage.getItem("imPrimaryTab");if(ipmt!=='RESERVE'){imPrimaryTab=true;window.localStorage.setItem("imPrimaryTab",'RESERVE');jQuery(window).on('beforeunload.imPrimaryTab',function(){window.localStorage.setItem("imPrimaryTab",'');});if(relayRace){clearInterval(primaryTabInterval);}}else{if(!relayRace){imPrimaryTab=false;primaryTabInterval=setInterval(function(){turnToPrimaryTab(true);},3000+Math.ceil(Math.random()*3000));}}};if(!isChatApp){return false;turnToPrimaryTab(false);var socket=window.io.connect(syncUrl,{query:'login='+user.login
++'&token='+user.api_key
++'&appId='+'textmagic_ws_chat',forceNew:true});socket.on('internal',function(data){console.log(data);if(data.header.type=='chatCacheClear'){jQuery.ajax({method:'GET',url:'/api/v2/chats/unread/count',data:{},dataType:'json',headers:{'X-TM-Username':user.login,'X-TM-Key':user.api_key},cache:false,success:function(d){var badge=jQuery('ul.nav span.total-unread');if(parseInt(d.total)==0){badge.text('');return;}
+badge.text(parseInt(d.total));}});return;}
+if(data.header.type=='messageIncoming'){var badge=jQuery('ul.nav span.total-unread');var previousValue=parseInt(badge.text(),10);if(isNaN(previousValue)){previousValue=0;}
+var newValue=previousValue+1;if(newValue<=0||isNaN(newValue)){newValue='';}
+badge.text(newValue);if(!imPrimaryTab){return;}
+if(typeof(Notification)==='undefined'||!Notification){console.log('Notification API is not supported');return false;}
+var contact=data.payload.sender;if(data.payload.contactId){contact={firstName:data.payload.firstName,lastName:data.payload.lastName,phone:data.payload.phone,avatar:data.payload.avatar?{href:data.payload.avatarHref}:null}}
+if(!app.data.user.dnShowNotifications||Notification.permission!=='granted'){return;}
+if(!app.data.user.dnShowText){data.payload.text='';}
+Notification.show(data.payload.text,contact,function(){window.focus();this.close();window.location='/online/messages/chat/'+data.payload.sender.trim('+');return;});}});}
+if(typeof(Notification)==='undefined'||!Notification){console.log('Notification API is not supported');return false;}
+Notification.show=function showNotification(text,contact,callback){var icon=settings.phoneIcon;var phone=contact;var title=phone;if(typeof(contact)==='object'){icon=settings.contactIcon;title=((contact.firstName?contact.firstName:'')+' '+(contact.lastName?contact.lastName:'')).trim();if(!title.trim()){title=contact.phone;}
+if(contact.avatar){if(typeof contact.avatar=='string'){icon='/'+contact.avatar;}else{icon='/'+contact.avatar.href;}}
+phone=contact.phone;}
+var notification=new Notification(title,{icon:icon,body:text});notification.onclick=callback;return true;};if(Notification.permission=='default'&&!isChatApp){Notification.requestPermission(function(permission){console.log(permission);if(permission==='default'){return;}
+var statusBool=permission==='granted';var statusInt=statusBool?1:0;jQuery.ajax({method:'PUT',url:'/api/v2/user/desktop/notification',data:{showNotifications:statusInt,showText:statusInt},dataType:'json',headers:{'X-TM-Username':user.login,'X-TM-Key':user.api_key},cache:false,success:function(d){app.data.user.dnShowNotifications=statusBool;app.data.user.dnShowText=statusBool;}});return;});}})();
